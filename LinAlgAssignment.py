@@ -5,6 +5,8 @@ Created on Mon Nov 22 13:17:57 2021
 @author: emile
 """
 
+import math
+
 class Vector:
     # Temporary constructor before implementing reading of files
     def __init__(self, inputVector):
@@ -23,8 +25,8 @@ class Vector:
         return self.vector
             
     def __str__ (self):
-        s = str(self.vector)
-        return s
+        return str(self.vector)
+        
 
     def __mul__(self, other):
         isinstance(other, (int,float))
@@ -42,6 +44,16 @@ class Vector:
         for i in range(len(self.vector)):
             som += self.vector[i] * other.vector[i]
         return som
+
+    def vectorLenght(self):
+        sqrd_length = 0
+        for i in range(len(self.vector)):
+            sqrd_length += self.vector[i]**2
+        return math.sqrt(sqrd_length)
+
+    def crossProduct(self, other):
+        if len(self.vector) == 3 and len(other.vector) == 3:
+            True
 
 # Testing creating an object of Vector
 a = Vector([1, 2, 3])
