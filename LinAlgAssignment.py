@@ -9,6 +9,23 @@ class Vector:
     # Temporary constructor before implementing reading of files
     def __init__(self, inputVector):
         self.vector = inputVector
+    
+    def __len__(self):
+        return len(self.vector)
+    
+    def __getitem__ (self, index):
+        return self.vector[index]
+    
+    def __add__(self, other):
+        assert isinstance(other, Vector)
+        for i in range (0, len(self.vector)):
+            self.vector[i] += other.vector[i]
+        return self.vector
+            
+    def __str__ (self):
+        s = str(self.vector)
+        return s
+        
 
     def __mul__(self, other):
         isinstance(other, (int,float))
@@ -26,6 +43,9 @@ b = Vector([4, 5, 6])
 
 
 
+
+
+print(a+b)
 
 
 """
