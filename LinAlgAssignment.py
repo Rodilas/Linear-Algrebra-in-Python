@@ -17,17 +17,18 @@ class Vector:
     
     def __getitem__ (self, index):
         return self.vector[index]
+
+    def __str__ (self):
+        return str(self.vector)
     
+    # Adding vectors
     def __add__(self, other):
         assert isinstance(other, Vector)
         for i in range (0, len(self.vector)):
             self.vector[i] += other.vector[i]
         return self.vector
-            
-    def __str__ (self):
-        return str(self.vector)
         
-
+    # Multiplying integers and floats with vectors
     def __mul__(self, other):
         isinstance(other, (int,float))
         newVector = [0] * len(self.vector)
@@ -38,6 +39,7 @@ class Vector:
     def __rmul__(self, other):
         return self.__mul__(other)
     
+    # Inner product
     def innerProduct(self, other):
         assert isinstance(other, Vector)
         som = 0
@@ -45,7 +47,8 @@ class Vector:
             som += self.vector[i] * other.vector[i]
         return som
 
-    def vectorLenght(self):
+    # Cross product
+    def vectorLength(self):
         sqrd_length = 0
         for i in range(len(self.vector)):
             sqrd_length += self.vector[i]**2
