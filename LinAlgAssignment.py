@@ -56,7 +56,11 @@ class Vector:
 
     def crossProduct(self, other):
         if self.length == 3 and len(other.vector) == 3:
-            True
+            c1 = self.vector[1]*other.vector[2] - self.vector[2]*other.vector[1]
+            c2 = self.vector[0]*other.vector[2] - self.vector[2]*other.vector[0]
+            c3 = self.vector[0]*other.vector[1] - self.vector[1]*other.vector[0]
+            return [c1, c2, c3]
+            
 
 # Testing creating an object of Vector
 a = Vector([1, 2, 3])
