@@ -88,6 +88,22 @@ class Matrix:
         transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
         for self.row in transposed:
             print(self.row)
+            
+            
+    def multiplication(self, other):
+    
+        mult= [[0 for i in range(self.col)] for j in range(other.row)]
+        
+        if self.col == other.row:
+      
+            for i in range(self.row):
+                for j in range(other.col):
+                    for k in range(self.col):
+                        mult[i][j] += self.matrix[i][k] * other.matrix[k][j]
+            print(mult)            
+            
+        else:
+            return print("Colum of first matrix different from rows of second matrix")        
 # Tasks:
 # Adding/subtracting matrices --> Alexis
 # Multiplying matrices by integers/floats --> Alexis
@@ -97,8 +113,18 @@ class Matrix:
 # Computing the determinant --> Emil
 
 # Testing creating an object of Matrix
+
+
 a = Matrix([[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]])
+b = Matrix([[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]])
+
+
+"""
 print(a)
 print(a.row)
 print(a.col)
 print(a.transposition())
+
+"""
+
+print(a.multiplication(b))
