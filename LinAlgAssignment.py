@@ -15,3 +15,6 @@ class Vector:
 # Testing creating an object of Vector
 a = Vector([1, 2, 3])
 b = Vector([4, 5, 6])
+print("pls work")
+
+
