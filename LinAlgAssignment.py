@@ -10,12 +10,21 @@ class Vector:
     def __init__(self, inputVector):
         self.vector = inputVector
 
+    def __mul__(self, other):
+        isinstance(other, (int,float))
+        newVector = [0] * len(self.vector)
+        for i in range(len(self.vector)):
+            newVector[i] = other * self.vector[i]
+        return Vector(newVector)
 
+    def __rmul__(self, other):
+        return self.__mul__(other)
 
 # Testing creating an object of Vector
 a = Vector([1, 2, 3])
 b = Vector([4, 5, 6])
-print("pls work")
+
+
 
 
 
@@ -34,25 +43,6 @@ for i in range(len(a)):
     sum.append(a[i] + b[i])
 
 print("Vector Addition = ", sum)
-
-
-"""
-
-#multiplicar vector por integer/float
-
-
-"""
-
-a = [1, 2, 3]
-n = 2.1
-
-Mult = []
-for j in range(len(a)):
-    Mult.append(a[j]*n)
-    
-print(Mult)    
-
-"""
 
 
 #inner product
