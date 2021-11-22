@@ -36,6 +36,14 @@ class Vector:
 
     def __rmul__(self, other):
         return self.__mul__(other)
+    
+    
+    def innerProduct(self, other):
+        assert isinstance(other, Vector)
+        som = 0
+        for i in range(len(self.vector)):
+            som += self.vector[i] * other.vector[i]
+        return som
 
 # Testing creating an object of Vector
 a = Vector([1, 2, 3])
