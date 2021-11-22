@@ -80,6 +80,10 @@ class Matrix:
                 s += "\n"
         return s
 
+    def transposition (self):
+        transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
+        for self.row in transposed:
+            print(self.row)
 # Tasks:
 # Adding/subtracting matrices --> Alexis
 # Multiplying matrices by integers/floats --> Alexis
@@ -93,3 +97,4 @@ a = Matrix([[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]])
 print(a)
 print(a.row)
 print(a.col)
+print(a.transposition())
