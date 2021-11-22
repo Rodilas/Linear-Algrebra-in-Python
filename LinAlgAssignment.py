@@ -7,6 +7,8 @@ Created on Mon Nov 22 13:17:57 2021
 
 import math
 
+# ------------ VECTORS ------------
+
 class Vector:
     # Temporary constructor before implementing reading of files
     def __init__(self, inputVector):
@@ -60,4 +62,34 @@ class Vector:
 a = Vector([1, 2, 3])
 b = Vector([4, 5, 6])
 
-print(a * 10)
+
+# ------------ MATRICES ------------
+
+class Matrix:
+    # Temporary constructor before implementing reading of files
+    def __init__(self, inputMatrix):
+        self.matrix = inputMatrix
+        self.col = len(inputMatrix[0])
+        self.row = len(inputMatrix)
+
+    def __str__(self):
+        s = ""
+        for r in range(self.row):
+            s += str(self.matrix[r])
+            if r < (self.row - 1):
+                s += "\n"
+        return s
+
+# Tasks:
+# Adding/subtracting matrices --> Alexis
+# Multiplying matrices by integers/floats --> Alexis
+# Multiplying matrices --> Rodrigo
+# Transposing matrices --> João S
+# Row-reducing matrices --> Oscar
+# Computing the determinant --> Emil
+
+# Testing creating an object of Matrix
+a = Matrix([[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]])
+print(a)
+print(a.row)
+print(a.col)
