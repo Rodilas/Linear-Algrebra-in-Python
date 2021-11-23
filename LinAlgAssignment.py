@@ -114,7 +114,7 @@ class Matrix:
         return ""
 
             
-    def multiplication(self, other):
+    def __mul__(self, other):
         mult = [[0 for i in range(other.col)] for j in range(self.row)]
         
         
@@ -125,7 +125,7 @@ class Matrix:
                     for k in range(other.row):
                         mult[i][j] += self.matrix[i][k] * other.matrix[k][j]
                         
-            return mult           
+            return Matrix(mult)           
                                                          
         else:
             return print("Colum of first matrix different from rows of second matrix")    
@@ -185,6 +185,6 @@ a= Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
 b = Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
 
 print(a.row, a.col, b.row, b.col)
-print(a.multiplication(b))
+print(a*b)
 
 
