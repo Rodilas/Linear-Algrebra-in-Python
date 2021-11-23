@@ -83,6 +83,29 @@ class Matrix:
             if r < (self.row - 1):
                 s += "\n"
         return s
+    
+    def __add__(self, other):
+       
+        add = [[0 for i in range(self.col)] for j in range(other.row)]
+        
+        if self.col == other.col and self.row == other.row:
+            
+            for i in range(self.row):
+                for j in range(other.col):
+                    add[i][j] = self.matrix[i][j] + other.matrix[i][j]
+                    
+            return Matrix(add)
+    
+    def __sub__(self, other):
+        sub = [[0 for i in range(self.col)] for j in range(other.row)]
+        
+        if self.col == other.col and self.row == other.row:
+            
+            for i in range(self.row):
+                for j in range(other.col):
+                    sub[i][j] = self.matrix[i][j] - other.matrix[i][j]
+            
+            return Matrix(sub)
 
     def transposition (self):
         transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
