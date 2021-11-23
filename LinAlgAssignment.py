@@ -88,20 +88,22 @@ class Matrix:
         transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
         for self.row in transposed:
             print(self.row)
-            
+        return ""
+
             
     def multiplication(self, other):
-    
-        mult= [[0 for i in range(self.col)] for j in range(other.row)]
+        mult = [[0 for i in range(other.col)] for j in range(self.row)]
+        
         
         if self.col == other.row:
-      
             for i in range(self.row):
                 for j in range(other.col):
-                    for k in range(self.col):
+                    k = 0
+                    for k in range(other.row):
                         mult[i][j] += self.matrix[i][k] * other.matrix[k][j]
-            print(mult)            
-            
+                        
+            return mult           
+                                                         
         else:
             return print("Colum of first matrix different from rows of second matrix")    
 
@@ -153,3 +155,13 @@ class Matrix:
 # Transposing matrices --> João S
 # Row-reducing matrices --> Oscar
 # Computing the determinant --> Emil
+
+# Testing creating an object of Matrix
+
+a= Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+b = Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+
+print(a.row, a.col, b.row, b.col)
+print(a.multiplication(b))
+
+
