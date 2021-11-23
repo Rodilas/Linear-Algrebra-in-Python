@@ -48,19 +48,19 @@ class Vector:
             som += self.vector[i] * other.vector[i]
         return som
 
-    # Cross product
+    #Magnitude/Length of vector
     def vectorLength(self):
         sqrd_length = 0
         for i in range(self.length):
             sqrd_length += self.vector[i]**2
         return math.sqrt(sqrd_length)
-
+    
+    # Cross product
     def crossProduct(self, other):
         if len(self.vector) == 3 and len(other.vector) == 3:
-            c1 = self.vector[1]*other.vector[2] - self.vector[2]*other.vector[1]
-            c2 = -(self.vector[0]*other.vector[2] - self.vector[2]*other.vector[0])
-            c3 = self.vector[0]*other.vector[1] - self.vector[1]*other.vector[0]
-            return Vector([c1, c2, c3])
+            return Vector([(self.vector[1]*other.vector[2] - self.vector[2]*other.vector[1]), 
+                           -(self.vector[0]*other.vector[2] - self.vector[2]*other.vector[0]), 
+                           (self.vector[0]*other.vector[1] - self.vector[1]*other.vector[0])])
         else:
             print("Cross product is not defined for these vector dimensions")
 
@@ -188,12 +188,11 @@ class Matrix:
         return Vector(tempCol)
     
     #Unfinished, hopefully useful for 4x4 determinant
-    def _getTempMatrix(self):
+    def excludeColumnMatrix(self):
+        self.matrix
         tempMatrix = []
-        for i in range(self.row):
-            for j in range(self.col):
-                tempRow = []
-                tempRow.append(self.matrix[i])
+        for i in range(self.col):
+            row = []
         
         
     #Ready for 2x2 and 3x3 Matrices but still working on 4x4
@@ -206,7 +205,7 @@ class Matrix:
                 return (self.matrix[0][0]*(self.matrix[1][1]*self.matrix[2][2] - self.matrix[2][1]*self.matrix[1][2]) 
             - self.matrix[0][1]*(self.matrix[1][0]*self.matrix[2][2] - self.matrix[2][0]*self.matrix[1][2]) 
             + self.matrix[0][2]*(self.matrix[1][0]*self.matrix[2][1] - self.matrix[2][0]*self.matrix[1][1]))
-            
+        
 
     def determinantFour(self):
         return False
@@ -228,6 +227,8 @@ b = Matrix([[5, 2, 3, 4],
             [6, 2, 3, 4],
             [7, 2, 3, 4], 
             [8, 2, 3, 4]])
+
+
 
 
 # ------------ SOLVING LINEAR SYSTEM ------------
@@ -271,4 +272,4 @@ class LinearSystemSolver:
 a = Matrix([[2, -1, 1], [1, 1, 0], [3, -1, -2]])
 b = Vector([3, -1, 7])
 l = LinearSystemSolver(a, b)
-print(l.solve())
+#print(l.solve())
