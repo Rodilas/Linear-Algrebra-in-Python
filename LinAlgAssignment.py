@@ -106,6 +106,11 @@ class Matrix:
                     sub[i][j] = self.matrix[i][j] - other.matrix[i][j]
             
             return Matrix(sub)
+    
+    #Multiplication with integer/float - not ready, trying to solve
+    def __mul__(self, other):
+        isinstance(other, (int, float))
+        newMatrix = [0]* self.length
 
     def transposition (self):
         transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
