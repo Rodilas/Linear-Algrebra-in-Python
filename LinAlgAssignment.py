@@ -83,15 +83,45 @@ class Matrix:
             if r < (self.row - 1):
                 s += "\n"
         return s
+    
+    def __add__(self, other):
+       
+        add = [[0 for i in range(self.col)] for j in range(other.row)]
+        
+        if self.col == other.col and self.row == other.row:
+            
+            for i in range(self.row):
+                for j in range(other.col):
+                    add[i][j] = self.matrix[i][j] + other.matrix[i][j]
+                    
+            return Matrix(add)
+    
+    def __sub__(self, other):
+        sub = [[0 for i in range(self.col)] for j in range(other.row)]
+        
+        if self.col == other.col and self.row == other.row:
+            
+            for i in range(self.row):
+                for j in range(other.col):
+                    sub[i][j] = self.matrix[i][j] - other.matrix[i][j]
+            
+            return Matrix(sub)
 
     def transposition (self):
         transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
         for self.row in transposed:
             print(self.row)
         return ""
+    
+    def symmetrical (self):
+        transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
+        if transposed == self.matrix:
+            return "The matrix is symmetrical"
+        else:
+            return "The matrix is not symmetrical"
 
             
-    def multiplication(self, other):
+    def __mul__(self, other):
         mult = [[0 for i in range(other.col)] for j in range(self.row)]
         
         
@@ -102,7 +132,7 @@ class Matrix:
                     for k in range(other.row):
                         mult[i][j] += self.matrix[i][k] * other.matrix[k][j]
                         
-            return mult           
+            return Matrix(mult)           
                                                          
         else:
             return print("Colum of first matrix different from rows of second matrix")    
@@ -145,7 +175,37 @@ class Matrix:
         matrixToSwap[i1] = matrixToSwap[i2]
         matrixToSwap[i2] = tempRow
 
+    #Private method for extracting "c"th column (in vector form), works
+    def _getCol(self, c):
+        tempCol = []
+        for i in range(self.col):
+            tempCol.append(self.matrix[i][c-1])
+        return Vector(tempCol)
     
+    #Unfinished, hopefully useful for 4x4 determinant
+    def _getTempMatrix(self):
+        tempMatrix = []
+        for i in range(self.row):
+            for j in range(self.col):
+                tempRow = []
+                tempRow.append(self.matrix[i])
+        
+        
+    #Ready for 2x2 and 3x3 Matrices but still working on 4x4
+    def determinant(self):
+        if self.row == self.col:
+            if self.row == 2:
+                det = self.matrix[0][0]*self.matrix[1][1] - self.matrix[0][1]*self.matrix[1][0]
+                return det
+            if self.row == 3:
+                return (self.matrix[0][0]*(self.matrix[1][1]*self.matrix[2][2] - self.matrix[2][1]*self.matrix[1][2]) 
+            - self.matrix[0][1]*(self.matrix[1][0]*self.matrix[2][2] - self.matrix[2][0]*self.matrix[1][2]) 
+            + self.matrix[0][2]*(self.matrix[1][0]*self.matrix[2][1] - self.matrix[2][0]*self.matrix[1][1]))
+            
+
+    def determinantFour(self):
+        return False
+        
 
 
 # Tasks:
@@ -158,6 +218,11 @@ class Matrix:
 
 # Testing creating an object of Matrix
 
+a= Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+b = Matrix([[5, 2, 3, 4],
+            [6, 2, 3, 4],
+            [7, 2, 3, 4], 
+            [8, 2, 3, 4]])
 
 
 # ------------ SOLVING LINEAR SYSTEM ------------
