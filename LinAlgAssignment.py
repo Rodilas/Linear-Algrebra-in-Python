@@ -24,9 +24,10 @@ class Vector:
     # Adding vectors
     def __add__(self, other):
         assert isinstance(other, Vector)
+        v = []
         for i in range (self.length):
-            self.vector[i] += other.vector[i]
-        return self.vector
+            v.append(self.vector[i] + other.vector[i])
+        return v
         
     # Multiplying integers and floats with vectors
     def __mul__(self, other):
