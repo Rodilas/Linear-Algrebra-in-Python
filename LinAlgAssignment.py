@@ -88,7 +88,8 @@ class Matrix:
         transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
         for self.row in transposed:
             print(self.row)
-            
+        return ""
+
             
     def multiplication(self, other):
     
@@ -114,17 +115,11 @@ class Matrix:
 
 # Testing creating an object of Matrix
 
-
 a = Matrix([[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]])
 b = Matrix([[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]])
 
 
-"""
-print(a)
-print(a.row)
-print(a.col)
+
 print(a.transposition())
 
-"""
 
-print(a.multiplication(b))
