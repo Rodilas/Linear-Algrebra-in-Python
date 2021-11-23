@@ -92,19 +92,21 @@ class Matrix:
 
             
     def multiplication(self, other):
-    
-        mult= [[0 for i in range(self.col)] for j in range(other.row)]
+        mult = [[0 for i in range(other.col)] for j in range(self.row)]
+        
         
         if self.col == other.row:
-      
             for i in range(self.row):
                 for j in range(other.col):
-                    for k in range(self.col):
+                    k = 0
+                    for k in range(other.row):
                         mult[i][j] += self.matrix[i][k] * other.matrix[k][j]
-            print(mult)            
-            
+                        
+            return mult           
+                                                         
         else:
-            return print("Colum of first matrix different from rows of second matrix")        
+            return print("Colum of first matrix different from rows of second matrix")       
+        
 # Tasks:
 # Adding/subtracting matrices --> Alexis
 # Multiplying matrices by integers/floats --> Alexis
@@ -115,11 +117,10 @@ class Matrix:
 
 # Testing creating an object of Matrix
 
-a = Matrix([[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]])
-b = Matrix([[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]])
+a= Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+b = Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
 
-
-
-print(a.transposition())
+print(a.row, a.col, b.row, b.col)
+print(a.multiplication(b))
 
 
