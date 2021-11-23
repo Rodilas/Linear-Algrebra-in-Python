@@ -168,7 +168,37 @@ class Matrix:
         matrixToSwap[i1] = matrixToSwap[i2]
         matrixToSwap[i2] = tempRow
 
+    #Private method for extracting "c"th column (in vector form), works
+    def _getCol(self, c):
+        tempCol = []
+        for i in range(self.col):
+            tempCol.append(self.matrix[i][c-1])
+        return Vector(tempCol)
     
+    #Unfinished, hopefully useful for 4x4 determinant
+    def _getTempMatrix(self):
+        tempMatrix = []
+        for i in range(self.row):
+            for j in range(self.col):
+                tempRow = []
+                tempRow.append(self.matrix[i])
+        
+        
+    #Ready for 2x2 and 3x3 Matrices but still working on 4x4
+    def determinant(self):
+        if self.row == self.col:
+            if self.row == 2:
+                det = self.matrix[0][0]*self.matrix[1][1] - self.matrix[0][1]*self.matrix[1][0]
+                return det
+            if self.row == 3:
+                return (self.matrix[0][0]*(self.matrix[1][1]*self.matrix[2][2] - self.matrix[2][1]*self.matrix[1][2]) 
+            - self.matrix[0][1]*(self.matrix[1][0]*self.matrix[2][2] - self.matrix[2][0]*self.matrix[1][2]) 
+            + self.matrix[0][2]*(self.matrix[1][0]*self.matrix[2][1] - self.matrix[2][0]*self.matrix[1][1]))
+            
+
+    def determinantFour(self):
+        return False
+        
 
 
 # Tasks:
@@ -182,7 +212,14 @@ class Matrix:
 # Testing creating an object of Matrix
 
 a= Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
-b = Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+b = Matrix([[5, 2, 3, 4],
+            [6, 2, 3, 4],
+            [7, 2, 3, 4], 
+            [8, 2, 3, 4]])
+
+
+
+
 
 print(a.row, a.col, b.row, b.col)
 print(a*b)
