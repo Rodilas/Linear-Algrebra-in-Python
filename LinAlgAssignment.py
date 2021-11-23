@@ -103,7 +103,49 @@ class Matrix:
             print(mult)            
             
         else:
-            return print("Colum of first matrix different from rows of second matrix")        
+            return print("Colum of first matrix different from rows of second matrix")    
+
+    def rowReduction(self):
+        # This method performs row reduction and returns a matrix in row echolon form
+        h = 0
+        k = 0
+        tempMatrix = Matrix(self.matrix)
+        row = tempMatrix.row
+        col = tempMatrix.col
+
+        while h < row and k < col:
+            # Finding index of maximum absolute value
+            imax = 0
+            tempMax = 0
+            for i in range(h, row):
+                if abs(tempMatrix.matrix[i][k]) > tempMax:
+                    imax = i
+                    tempMax = abs(tempMatrix.matrix[i][k])
+            
+            if tempMatrix.matrix[imax][k] == 0:
+                # No pivot in this column, move on to the next
+                k += 1
+            else:
+                self.__swapRows(tempMatrix.matrix, h, imax)
+                for x in range(h+1, row):
+                    f = tempMatrix.matrix[x][k] / tempMatrix.matrix[h][k]
+                    tempMatrix.matrix[x][k] = 0
+                    for y in range(k+1, col):
+                        tempMatrix.matrix[x][y] = (tempMatrix.matrix[x][y] - f*tempMatrix.matrix[h][y])
+                h += 1
+                k += 1
+        
+        return tempMatrix
+    
+    # Private method used in row reduction
+    def __swapRows(self, matrixToSwap, i1, i2):
+        tempRow = matrixToSwap[i1]
+        matrixToSwap[i1] = matrixToSwap[i2]
+        matrixToSwap[i2] = tempRow
+
+    
+
+
 # Tasks:
 # Adding/subtracting matrices --> Alexis
 # Multiplying matrices by integers/floats --> Alexis
@@ -111,20 +153,3 @@ class Matrix:
 # Transposing matrices --> João S
 # Row-reducing matrices --> Oscar
 # Computing the determinant --> Emil
-
-# Testing creating an object of Matrix
-
-
-a = Matrix([[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]])
-b = Matrix([[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]])
-
-
-"""
-print(a)
-print(a.row)
-print(a.col)
-print(a.transposition())
-
-"""
-
-print(a.multiplication(b))
