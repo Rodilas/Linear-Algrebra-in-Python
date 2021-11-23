@@ -158,10 +158,47 @@ class Matrix:
 
 # Testing creating an object of Matrix
 
-a= Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
-b = Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
-
-print(a.row, a.col, b.row, b.col)
-print(a.multiplication(b))
 
 
+# ------------ SOLVING LINEAR SYSTEM ------------
+
+class LinearSystemSolver:
+    # Temporary constructor before implementing reading of files
+    def __init__(self, inputMatrix, inputVector):
+        # Add functionality that checks if matrix is quadratic and same dimension as vector
+        self.a = inputMatrix
+        self.b = inputVector
+        self.dim = len(inputMatrix.matrix)
+
+    def solve(self):
+        # Merging the A matrix with the B vector
+        mergedMatrix = [[0 for j in range(self.dim + 1)] for i in range(self.dim)]
+        for r in range(self.dim):
+            for c in range(self.dim + 1):
+                if c < (self.dim):
+                    mergedMatrix[r][c] = self.a.matrix[r][c]
+                else:
+                    mergedMatrix[r][c] = self.b.vector[r]
+
+        # Row reduction
+        m = Matrix(mergedMatrix)
+        m = m.rowReduction()
+        m = m.matrix
+
+        # Calculation xn
+        result = [0]*self.dim
+        result[self.dim-1] = m[self.dim-1][self.dim]/m[self.dim-1][self.dim-1]
+
+        # Calculating x1 --> xn-1
+        for i in range(self.dim-2, -1, -1):
+            sum = 0
+            for j in range(i+1, self.dim):
+                sum += m[i][j]*result[j]
+            result[i] = (m[i][self.dim] - sum)/m[i][i]
+        
+        return Vector(result)
+
+a = Matrix([[2, -1, 1], [1, 1, 0], [3, -1, -2]])
+b = Vector([3, -1, 7])
+l = LinearSystemSolver(a, b)
+print(l.solve())
