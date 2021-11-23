@@ -112,6 +112,13 @@ class Matrix:
         for self.row in transposed:
             print(self.row)
         return ""
+    
+    def symmetrical (self):
+        transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
+        if transposed == self.matrix:
+            return "The matrix is symmetrical"
+        else:
+            return "The matrix is not symmetrical"
 
             
     def __mul__(self, other):
@@ -223,5 +230,3 @@ b = Matrix([[5, 2, 3, 4],
 
 print(a.row, a.col, b.row, b.col)
 print(a*b)
-
-
