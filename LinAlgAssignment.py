@@ -55,18 +55,17 @@ class Vector:
         return math.sqrt(sqrd_length)
 
     def crossProduct(self, other):
-        if self.length == 3 and len(other.vector) == 3:
+        if len(self.vector) == 3 and len(other.vector) == 3:
             c1 = self.vector[1]*other.vector[2] - self.vector[2]*other.vector[1]
-            c2 = self.vector[0]*other.vector[2] - self.vector[2]*other.vector[0]
+            c2 = -(self.vector[0]*other.vector[2] - self.vector[2]*other.vector[0])
             c3 = self.vector[0]*other.vector[1] - self.vector[1]*other.vector[0]
-            return [c1, c2, c3]
-            
+            return Vector([c1, c2, c3])
+        else:
+            print("Cross product is not defined for these vector dimensions")
 
 # Testing creating an object of Vector
 a = Vector([1, 2, 3])
 b = Vector([4, 5, 6])
-
-
 # ------------ MATRICES ------------
 
 class Matrix:
