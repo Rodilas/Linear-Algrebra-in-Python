@@ -57,7 +57,7 @@ class Vector:
     
     # Cross product
     def crossProduct(self, other):
-        if len(self.vector) == 3 and len(other.vector) == 3:
+        if (self.length) == 3 and (other.length) == 3:
             return Vector([(self.vector[1]*other.vector[2] - self.vector[2]*other.vector[1]), 
                            -(self.vector[0]*other.vector[2] - self.vector[2]*other.vector[0]), 
                            (self.vector[0]*other.vector[1] - self.vector[1]*other.vector[0])])
@@ -67,7 +67,10 @@ class Vector:
 # Testing creating an object of Vector
 a = Vector([1, 2, 3])
 b = Vector([4, 5, 6])
+
+
 # ------------ MATRICES ------------
+from copy import deepcopy
 
 class Matrix:
     # Temporary constructor before implementing reading of files
@@ -75,6 +78,9 @@ class Matrix:
         self.matrix = inputMatrix
         self.col = len(inputMatrix[0])
         self.row = len(inputMatrix)
+        for i in range(self.row):
+            for j in range(1, self.row):
+                assert len(inputMatrix[i]) == len(inputMatrix[j])
 
     def __str__(self):
         s = ""
@@ -98,7 +104,7 @@ class Matrix:
     
     def __sub__(self, other):
         sub = [[0 for i in range(self.col)] for j in range(other.row)]
-        
+
         if self.col == other.col and self.row == other.row:
             
             for i in range(self.row):
@@ -180,36 +186,44 @@ class Matrix:
         matrixToSwap[i1] = matrixToSwap[i2]
         matrixToSwap[i2] = tempRow
 
-    #Private method for extracting "c"th column (in vector form), works
-    def _getCol(self, c):
+    #Method for extracting "c"th column (in vector form)
+    def getCol(self, c):
         tempCol = []
         for i in range(self.col):
             tempCol.append(self.matrix[i][c-1])
-        return Vector(tempCol)
-    
-    #Unfinished, hopefully useful for 4x4 determinant
-    def excludeColumnMatrix(self):
-        self.matrix
-        tempMatrix = []
-        for i in range(self.col):
-            row = []
+        return Vector(tempCol) 
         
-        
-    #Ready for 2x2 and 3x3 Matrices but still working on 4x4
+    #Determinant method
     def determinant(self):
         if self.row == self.col:
+            if self.row == 1:
+                return self.matrix[0][0]
             if self.row == 2:
                 det = self.matrix[0][0]*self.matrix[1][1] - self.matrix[0][1]*self.matrix[1][0]
                 return det
-            if self.row == 3:
-                return (self.matrix[0][0]*(self.matrix[1][1]*self.matrix[2][2] - self.matrix[2][1]*self.matrix[1][2]) 
-            - self.matrix[0][1]*(self.matrix[1][0]*self.matrix[2][2] - self.matrix[2][0]*self.matrix[1][2]) 
-            + self.matrix[0][2]*(self.matrix[1][0]*self.matrix[2][1] - self.matrix[2][0]*self.matrix[1][1]))
-        
+            elif self.row > 2:
+                det = 0
+                for j in range(self.col):
+                    tempMatrix = self.__smaller_matrix(0, j)
+                    cofactor = (-1) ** (j+2) * self.matrix[0][j] * (tempMatrix.determinant())
+                    det += cofactor
+                return det
+        else:
+            print("We can only find determinants for square matrices, this matrix is not square.")
+            
+    #Used in the determinant method for matrices > 2x2
+    def __smaller_matrix(self, r, c):
+        new_matrix = deepcopy(self.matrix)
+        new_matrix.remove(self.matrix[r]) #Removes row at index r
+        for i in range(len(new_matrix)):
+            new_matrix[i].remove(new_matrix[i][c]) #Removes column at index c
+        return Matrix(new_matrix)
 
-    def determinantFour(self):
-        return False
-        
+    #Probably a lot more "efficient" than the Determinant method but only works for 3x3 matrices, lets discuss this
+    def alt_three_det(self):
+               return (self.matrix[0][0]*(self.matrix[1][1]*self.matrix[2][2] - self.matrix[2][1]*self.matrix[1][2]) 
+            - self.matrix[0][1]*(self.matrix[1][0]*self.matrix[2][2] - self.matrix[2][0]*self.matrix[1][2]) 
+            + self.matrix[0][2]*(self.matrix[1][0]*self.matrix[2][1] - self.matrix[2][0]*self.matrix[1][1])) 
 
 
 # Tasks:
@@ -222,11 +236,6 @@ class Matrix:
 
 # Testing creating an object of Matrix
 
-a= Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
-b = Matrix([[5, 2, 3, 4],
-            [6, 2, 3, 4],
-            [7, 2, 3, 4], 
-            [8, 2, 3, 4]])
 
 
 
@@ -273,3 +282,4 @@ a = Matrix([[2, -1, 1], [1, 1, 0], [3, -1, -2]])
 b = Vector([3, -1, 7])
 l = LinearSystemSolver(a, b)
 #print(l.solve())
+
