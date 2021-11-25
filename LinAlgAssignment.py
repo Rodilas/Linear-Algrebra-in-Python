@@ -112,11 +112,30 @@ class Matrix:
                     sub[i][j] = self.matrix[i][j] - other.matrix[i][j]
             
             return Matrix(sub)
-    
-    #Multiplication with integer/float - not ready, trying to solve
+        
     def __mul__(self, other):
-        isinstance(other, (int, float))
-        newMatrix = [0]* self.length
+        if isinstance(other, (int,float)) == True:
+            mult = [[0 for i in range(self.col)] for j in range(self.row)]
+            for i in range(self.row):
+                for j in range(self.col):
+                    mult[i][j] = self.matrix[i][j] * other
+            return Matrix(mult)
+       
+        else:
+            mult = [[0 for i in range(other.col)] for j in range(self.row)]
+
+            if self.col == other.row:
+                for i in range(self.row):
+                    for j in range(other.col):
+                        k = 0
+                        for k in range(other.row):
+                            mult[i][j] += self.matrix[i][k] * other.matrix[k][j]
+                        
+                return Matrix(mult)            
+                                                         
+            else:
+                return "Colum of first matrix different from rows of second matrix"   
+   
 
     def transposition (self):
         transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
@@ -132,21 +151,6 @@ class Matrix:
             return "The matrix is not symmetrical"
 
             
-    def __mul__(self, other):
-        mult = [[0 for i in range(other.col)] for j in range(self.row)]
-        
-        
-        if self.col == other.row:
-            for i in range(self.row):
-                for j in range(other.col):
-                    k = 0
-                    for k in range(other.row):
-                        mult[i][j] += self.matrix[i][k] * other.matrix[k][j]
-                        
-            return Matrix(mult)           
-                                                         
-        else:
-            return print("Colum of first matrix different from rows of second matrix")    
 
     def rowReduction(self):
         # This method performs row reduction and returns a matrix in row echolon form
