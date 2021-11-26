@@ -280,10 +280,15 @@ class LinearSystemSolver:
                 sum += m[i][j]*result[j]
             result[i] = (m[i][self.dim] - sum)/m[i][i]
         
-        return Vector(result)
+        # Returning a one column matrix
+        resultMatrix =[]
+        for i in range(self.dim):
+            resultMatrix.append([result[i]])
+        return Matrix(resultMatrix)
 
 a = Matrix([[2, -1, 1], [1, 1, 0], [3, -1, -2]])
-b = Vector([3, -1, 7])
+b = Vector([8, -4, 1])
 l = LinearSystemSolver(a, b)
-#print(l.solve())
+s = l.solve()
+#print(a*s)
 
