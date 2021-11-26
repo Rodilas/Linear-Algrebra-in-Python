@@ -241,6 +241,45 @@ class Matrix:
 # Testing creating an object of Matrix
 
 
+#------------- LOADING THE FILE ----------------
+
+#needs to be implemented on the matrix constructor?
+
+class matrix:
+    def __init__(self, filename):
+        
+        self.filename = filename
+    
+    def load(self):
+
+        f=open(self.filename, 'r')
+        n= f.readline() #reads first line for dimension
+        s = n.split()   #splits the first line
+        num= int(s[2])+ 1 #gets matrix dimension, int is because split reads as a char
+            
+        f.readline() #useless line
+            
+        matrice = []  #store matrix here
+            
+        line = f.readline().split()
+        for i in range(num): #rows
+            rows = [] #each row
+            for j in range(num): #col
+                row, col, val = int(line[0]), int(line[1]), float(line[2])  #basically each of the next lines of the file format
+                if row == i and col == j : #checks to see if its 0 entry or not
+                    rows.append(val) #add value to row
+                    line = f.readline().split() #loop entry
+                else:
+                    rows.append(0)
+                        
+            matrice.append(rows) #add 10 by 10 to matrix
+        f.close()
+        return matrice
+             
+
+file= input("Insert the file name:")
+matrix = matrix(file)
+print(matrix.load())
 
 
 
