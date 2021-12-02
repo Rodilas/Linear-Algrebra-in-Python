@@ -10,7 +10,7 @@ import math
 # ------------ VECTORS ------------
 
 class Vector:
-    # Temporary constructor before implementing reading of files
+    # Add feature of reading from file?
     def __init__(self, inputVector):
         self.vector = inputVector
         self.length = len(inputVector)
@@ -64,16 +64,11 @@ class Vector:
         else:
             print("Cross product is not defined for these vector dimensions")
 
-# Testing creating an object of Vector
-a = Vector([1, 2, 3])
-b = Vector([4, 5, 6])
-
 
 # ------------ MATRICES ------------
 from copy import deepcopy
 
 class Matrix:
-    # Temporary constructor before implementing reading of files
     def __init__(self, inputMatrix):
         self.matrix = inputMatrix
         self.col = len(inputMatrix[0])
@@ -230,28 +225,14 @@ class Matrix:
             + self.matrix[0][2]*(self.matrix[1][0]*self.matrix[2][1] - self.matrix[2][0]*self.matrix[1][1])) 
 
 
-# Tasks:
-# Adding/subtracting matrices --> Alexis
-# Multiplying matrices by integers/floats --> Alexis
-# Multiplying matrices --> Rodrigo
-# Transposing matrices --> João S
-# Row-reducing matrices --> Oscar
-# Computing the determinant --> Emil
-
-# Testing creating an object of Matrix
-
 
 #------------- LOADING THE FILE ----------------
 
-#needs to be implemented on the matrix constructor?
-
-class matrix:
+class MatrixReader:
     def __init__(self, filename):
-        
         self.filename = filename
     
     def load(self):
-
         f=open(self.filename, 'r')
         n= f.readline() #reads first line for dimension
         s = n.split()   #splits the first line
@@ -275,12 +256,6 @@ class matrix:
             matrice.append(rows) #add 10 by 10 to matrix
         f.close()
         return matrice
-             
-
-file= input("Insert the file name:")
-matrix = matrix(file)
-print(matrix.load())
-
 
 
 # ------------ SOLVING LINEAR SYSTEM ------------
@@ -318,16 +293,9 @@ class LinearSystemSolver:
             for j in range(i+1, self.dim):
                 sum += m[i][j]*result[j]
             result[i] = (m[i][self.dim] - sum)/m[i][i]
-        
+
         # Returning a one column matrix
         resultMatrix =[]
         for i in range(self.dim):
             resultMatrix.append([result[i]])
         return Matrix(resultMatrix)
-
-a = Matrix([[2, -1, 1], [1, 1, 0], [3, -1, -2]])
-b = Vector([8, -4, 1])
-l = LinearSystemSolver(a, b)
-s = l.solve()
-#print(a*s)
-
