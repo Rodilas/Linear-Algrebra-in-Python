@@ -1,4 +1,4 @@
-from LinAlgAssignment import Vector, Matrix, MatrixReader, LinearSystemSolver
+from Classes import Vector, Matrix, MatrixReader, LinearSystemSolver
 import random, time
 
 print("------- A * X = B -------")

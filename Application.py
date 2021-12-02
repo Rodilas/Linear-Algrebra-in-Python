@@ -1,4 +1,4 @@
-from LinAlgAssignment import Vector, Matrix, MatrixReader, LinearSystemSolver
+from Classes import Vector, Matrix, MatrixReader, LinearSystemSolver
 
 # Temporary setup. We need to figure out want kind of application the professor wants.
 
