@@ -66,7 +66,7 @@ class Vector:
 
 
 # ------------ MATRICES ------------
-from copy import deepcopy
+
 
 class Matrix:
     def __init__(self, inputMatrix):
@@ -192,39 +192,22 @@ class Matrix:
             tempCol.append(self.matrix[i][c-1])
         return Vector(tempCol) 
         
-    #Determinant method
+    #Determinant method, how to count the number of swaps made in rowReduction?
     def determinant(self):
-        if self.row == self.col:
-            if self.row == 1:
-                return self.matrix[0][0]
-            if self.row == 2:
-                det = self.matrix[0][0]*self.matrix[1][1] - self.matrix[0][1]*self.matrix[1][0]
+        reducedMatrix = self.rowReduction()
+        if reducedMatrix.row == reducedMatrix.col:
+            det = reducedMatrix.matrix[0][0]
+            if reducedMatrix.row == 1:
                 return det
-            elif self.row > 2:
-                det = 0
-                for j in range(self.col):
-                    tempMatrix = self.__smaller_matrix(0, j)
-                    cofactor = (-1) ** (j+2) * self.matrix[0][j] * (tempMatrix.determinant())
-                    det += cofactor
+            else:
+                for i in range(1, reducedMatrix.row):
+                    det *= reducedMatrix.matrix[i][i]
                 return det
         else:
-            print("We can only find determinants for square matrices, this matrix is not square.")
-            
-    #Used in the determinant method for matrices > 2x2
-    def __smaller_matrix(self, r, c):
-        new_matrix = deepcopy(self.matrix)
-        new_matrix.remove(self.matrix[r]) #Removes row at index r
-        for i in range(len(new_matrix)):
-            new_matrix[i].remove(new_matrix[i][c]) #Removes column at index c
-        return Matrix(new_matrix)
-
-    #Probably a lot more "efficient" than the Determinant method but only works for 3x3 matrices, lets discuss this
-    def alt_three_det(self):
-               return (self.matrix[0][0]*(self.matrix[1][1]*self.matrix[2][2] - self.matrix[2][1]*self.matrix[1][2]) 
-            - self.matrix[0][1]*(self.matrix[1][0]*self.matrix[2][2] - self.matrix[2][0]*self.matrix[1][2]) 
-            + self.matrix[0][2]*(self.matrix[1][0]*self.matrix[2][1] - self.matrix[2][0]*self.matrix[1][1])) 
+            print("Only square matrices may have determinants, this matrix is not square.")
 
 
+a = Matrix([[1, 2], [3, 4]])
 
 #------------- LOADING THE FILE ----------------
 
