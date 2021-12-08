@@ -197,14 +197,17 @@ class Matrix:
     #Determinant method, how to count the number of swaps made in rowReduction?
     def determinant(self):
         reducedMatrix = self.rowReduction()[0]
+        swaps = self.rowReduction()[1]
         if reducedMatrix.row == reducedMatrix.col:
             det = reducedMatrix.matrix[0][0]
-            if reducedMatrix.row == 1:
-                return det
+            if self.col % 2 != 0:
+                for i in range(1, reducedMatrix.row):
+                    det *= reducedMatrix.matrix[i][i]
+                return det * (-1 ** swaps)
             else:
                 for i in range(1, reducedMatrix.row):
                     det *= reducedMatrix.matrix[i][i]
-                return det
+                return det * (-1 ** (swaps - 1))
         else:
             print("Only square matrices may have determinants, this matrix is not square.")
 
@@ -212,6 +215,7 @@ class Matrix:
 a = Matrix([[3, 0, 0, 3, 0], [-3, 0, -2, 0, 0], [0, -1, 0, 0, -3], [0, 0, 0, 3, 3], [0, -1, 2, 0, 1]])
 print(a.rowReduction())
 print(a.rowReduction()[0])
+print(a.determinant())
 
 #------------- LOADING THE FILE ----------------
 
