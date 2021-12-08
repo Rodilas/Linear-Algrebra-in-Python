@@ -154,6 +154,7 @@ class Matrix:
         tempMatrix = Matrix(self.matrix)
         row = tempMatrix.row
         col = tempMatrix.col
+        swapRowCounter = 0
 
         while h < row and k < col:
             # Finding index of maximum absolute value
@@ -169,6 +170,7 @@ class Matrix:
                 k += 1
             else:
                 self.__swapRows(tempMatrix.matrix, h, imax)
+                swapRowCounter += 1
                 for x in range(h+1, row):
                     f = tempMatrix.matrix[x][k] / tempMatrix.matrix[h][k]
                     tempMatrix.matrix[x][k] = 0
@@ -177,7 +179,7 @@ class Matrix:
                 h += 1
                 k += 1
         
-        return tempMatrix
+        return [tempMatrix, swapRowCounter]
     
     # Private method used in row reduction
     def __swapRows(self, matrixToSwap, i1, i2):
@@ -194,7 +196,7 @@ class Matrix:
         
     #Determinant method, how to count the number of swaps made in rowReduction?
     def determinant(self):
-        reducedMatrix = self.rowReduction()
+        reducedMatrix = self.rowReduction()[0]
         if reducedMatrix.row == reducedMatrix.col:
             det = reducedMatrix.matrix[0][0]
             if reducedMatrix.row == 1:
@@ -207,7 +209,9 @@ class Matrix:
             print("Only square matrices may have determinants, this matrix is not square.")
 
 
-a = Matrix([[1, 2], [3, 4]])
+a = Matrix([[3, 0, 0, 3, 0], [-3, 0, -2, 0, 0], [0, -1, 0, 0, -3], [0, 0, 0, 3, 3], [0, -1, 2, 0, 1]])
+print(a.rowReduction())
+print(a.rowReduction()[0])
 
 #------------- LOADING THE FILE ----------------
 
@@ -263,7 +267,7 @@ class LinearSystemSolver:
 
         # Row reduction
         m = Matrix(mergedMatrix)
-        m = m.rowReduction()
+        m = m.rowReduction()[0]
         m = m.matrix
 
         # Calculation xn
