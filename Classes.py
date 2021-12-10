@@ -129,13 +129,14 @@ class Matrix:
                 return Matrix(mult)            
                                                          
             else:
-                return "Colum of first matrix different from rows of second matrix"
+                print("Colum of first matrix different from rows of second matrix")
     
     def __rmul__(self, other):
         isinstance(other, (int,float))
         return self.__mul__(other)
    
 
+<<<<<<< Updated upstream
     def transpose (self):
         temp = self.matrix
         transposed = [[temp[j][i] for j in range(self.row)] for i in range(self.col)]
@@ -144,8 +145,20 @@ class Matrix:
     def symmetrical (self):
         if self.transpose() == self.matrix:
             return "The matrix is symmetrical"
+=======
+    def transposition (self):
+        transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
+        for self.row in transposed:
+            print(self.row)
+        return ""
+    
+    def isSymmetrical (self):
+        transposed = [[self.matrix[j][i] for j in range(self.row)] for i in range(self.col)]
+        if transposed == self.matrix:
+            return True
+>>>>>>> Stashed changes
         else:
-            return "The matrix is not symmetrical"
+            return False
 
             
 
@@ -215,7 +228,15 @@ class Matrix:
 
 
 a = Matrix([[3, 0, 0, 3, 0], [-3, 0, -2, 0, 0], [0, -1, 0, 0, -3], [0, 0, 0, 3, 3], [0, -1, 2, 0, 1]])
+<<<<<<< Updated upstream
 print(a.transpose())
+=======
+print(a.rowReduction()[0])
+print()
+print(a)
+
+
+>>>>>>> Stashed changes
 #print(a.rowReduction())
 #print(a.rowReduction()[0])
 #print(a.determinant())
