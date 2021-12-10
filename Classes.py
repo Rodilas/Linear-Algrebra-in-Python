@@ -135,7 +135,7 @@ class Matrix:
                 return Matrix(mult)            
                                                          
             else:
-                return "Colum of first matrix different from rows of second matrix"
+                print("Colum of first matrix different from rows of second matrix")
     
     def __rmul__(self, other):
         isinstance(other, (int,float))
@@ -151,7 +151,7 @@ class Matrix:
         if self.transpose() == self.matrix:
             return "The matrix is symmetrical"
         else:
-            return "The matrix is not symmetrical"
+            return False
 
             
 
@@ -221,12 +221,6 @@ class Matrix:
 
 
 a = Matrix([[3, 0, 0, 3, 0], [-3, 0, -2, 0, 0], [0, -1, 0, 0, -3], [0, 0, 0, 3, 3], [0, -1, 2, 0, 1]])
-b = a.rowReduction()[0]
-print(a, '\n')
-print(b)
-#print(a.rowReduction())
-#print(a.rowReduction()[0])
-#print(a.determinant())
 
 #------------- LOADING THE FILE ----------------
 
