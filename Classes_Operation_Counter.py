@@ -73,9 +73,11 @@ class Matrix:
         self.matrix = inputMatrix
         self.col = len(inputMatrix[0])
         self.row = len(inputMatrix)
+        self.count = 0
         for i in range(self.row):
             for j in range(1, self.row):
                 assert len(inputMatrix[i]) == len(inputMatrix[j])
+                self.count+=1
 
     def __str__(self):
         s = ""
@@ -152,6 +154,7 @@ class Matrix:
         h = 0
         k = 0
         tempMatrix = Matrix(self.matrix)
+        self.count += tempMatrix.count
         row = tempMatrix.row
         col = tempMatrix.col
         swapRowCounter = 0
@@ -161,23 +164,30 @@ class Matrix:
             imax = 0
             tempMax = 0
             for i in range(h, row):
+                self.count+=1
                 if abs(tempMatrix.matrix[i][k]) > tempMax:
                     imax = i
                     tempMax = abs(tempMatrix.matrix[i][k])
             
             if tempMatrix.matrix[imax][k] == 0:
+                self.count+=1
                 # No pivot in this column, move on to the next
                 k += 1
             else:
+                self.count+=1
                 self.__swapRows(tempMatrix.matrix, h, imax)
                 swapRowCounter += 1
+                self.count+=1
                 for x in range(h+1, row):
                     f = tempMatrix.matrix[x][k] / tempMatrix.matrix[h][k]
+                    self.count+=1
                     tempMatrix.matrix[x][k] = 0
                     for y in range(k+1, col):
                         tempMatrix.matrix[x][y] = (tempMatrix.matrix[x][y] - f*tempMatrix.matrix[h][y])
+                        self.count+=1
                 h += 1
                 k += 1
+                self.count+=2
         
         return [tempMatrix, swapRowCounter]
     
@@ -211,11 +221,9 @@ class Matrix:
         else:
             print("Only square matrices may have determinants, this matrix is not square.")
 
-
-#a = Matrix([[3, 0, 0, 3, 0], [-3, 0, -2, 0, 0], [0, -1, 0, 0, -3], [0, 0, 0, 3, 3], [0, -1, 2, 0, 1]])
-#print(a.rowReduction())
-#print(a.rowReduction()[0])
-#print(a.determinant())
+    # Method to return count
+    def getCount(self):
+        return self.count
 
 #------------- LOADING THE FILE ----------------
 
@@ -260,6 +268,7 @@ class LinearSystemSolver:
         self.dim = len(inputMatrix.matrix)
 
     def solve(self):
+        count = 0
         # Merging the A matrix with the B vector
         mergedMatrix = [[0 for j in range(self.dim + 1)] for i in range(self.dim)]
         for r in range(self.dim):
@@ -268,25 +277,30 @@ class LinearSystemSolver:
                     mergedMatrix[r][c] = self.a.matrix[r][c]
                 else:
                     mergedMatrix[r][c] = self.b.vector[r]
+                count+=1
 
         # Row reduction
         m = Matrix(mergedMatrix)
-        m = m.rowReduction()[0]
-        m = m.matrix
+        mTemp = m.rowReduction()[0]
+        count += m.getCount()
+        m = mTemp.matrix
 
         # Calculation xn
         result = [0]*self.dim
         result[self.dim-1] = m[self.dim-1][self.dim]/m[self.dim-1][self.dim-1]
+        count+=2
 
         # Calculating x1 --> xn-1
         for i in range(self.dim-2, -1, -1):
             sum = 0
             for j in range(i+1, self.dim):
                 sum += m[i][j]*result[j]
+                count+=1
             result[i] = (m[i][self.dim] - sum)/m[i][i]
+            count+=1
 
         # Returning a one column matrix
         resultMatrix =[]
         for i in range(self.dim):
             resultMatrix.append([result[i]])
-        return Matrix(resultMatrix)
+        return [Matrix(resultMatrix), count]

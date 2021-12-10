@@ -1,4 +1,5 @@
 from Classes import Vector, Matrix, MatrixReader, LinearSystemSolver
+from Classes_Operation_Counter import LinearSystemSolver as LSSOperations
 import random, time
 
 print("------- A * X = B -------")
@@ -54,3 +55,10 @@ else:
 endTime = time.time()
 print('\n', end="")
 print("ELAPSED TIME: ", endTime-startTime, "seconds")
+
+# ----- COUNT OPERATIONS -----
+print('\n', end="")
+print("Counting no. of operations...")
+lOperations = LSSOperations(a, bVector)
+noOfOperations = lOperations.solve()[1]
+print("NUMBER OF OPERATIONS: ", noOfOperations)
