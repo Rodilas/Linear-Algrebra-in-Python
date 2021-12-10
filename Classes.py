@@ -10,7 +10,6 @@ import math
 # ------------ VECTORS ------------
 
 class Vector:
-    # Add feature of reading from file?
     def __init__(self, inputVector):
         self.length = len(inputVector)
         self.vector = []
@@ -67,8 +66,8 @@ class Vector:
             print("Cross product is not defined for these vector dimensions")
 
 
-# ------------ MATRICES ------------
 
+# ------------ MATRICES ------------
 
 class Matrix:
     def __init__(self, inputMatrix):
@@ -200,7 +199,7 @@ class Matrix:
             tempCol.append(self.matrix[i][c-1])
         return Vector(tempCol) 
         
-    #Determinant method, how to count the number of swaps made in rowReduction?
+    #Determinant method
     def determinant(self):
         reducedMatrix = self.rowReduction()[0]
         swaps = self.rowReduction()[1]
@@ -217,8 +216,6 @@ class Matrix:
         else:
             print("Only square matrices may have determinants, this matrix is not square.")
 
-
-a = Matrix([[3, 0, 0, 3, 0], [-3, 0, -2, 0, 0], [0, -1, 0, 0, -3], [0, 0, 0, 3, 3], [0, -1, 2, 0, 1]])
 
 #------------- LOADING THE FILE ----------------
 
@@ -251,7 +248,6 @@ class MatrixReader:
         f.close()
         return matrice
 
-#------------
 
 class VectorReader:
     def __init__(self, filename):
@@ -265,8 +261,6 @@ class VectorReader:
             
         f.readline() #useless line
             
-       
-            
         line = f.readline().split()
         for i in range(rows): #rows
             TempVect = [] #will store the row we want
@@ -278,7 +272,6 @@ class VectorReader:
                 else:
                     TempVect.append(0)
                         
-        
         Vector = [] #new vector
         #loop will give a vector of dimension asked
         for i in range(dimension): 
@@ -291,6 +284,7 @@ file = VectorReader('matrix_file_10.txt')
 rows = eval(input("Insert vector row, has to be smalller then the matrix dimension:"))
 dimension = eval(input("Insert vector dimension, has to be smalller then the matrix dimension:"))
 print(file.load())
+
 
 # ------------ SOLVING LINEAR SYSTEM ------------
 
