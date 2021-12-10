@@ -10,7 +10,6 @@ import math
 # ------------ VECTORS ------------
 
 class Vector:
-    # Add feature of reading from file?
     def __init__(self, inputVector):
         self.length = len(inputVector)
         self.vector = []
@@ -67,8 +66,8 @@ class Vector:
             print("Cross product is not defined for these vector dimensions")
 
 
-# ------------ MATRICES ------------
 
+# ------------ MATRICES ------------
 
 class Matrix:
     def __init__(self, inputMatrix):
@@ -200,7 +199,7 @@ class Matrix:
             tempCol.append(self.matrix[i][c-1])
         return Vector(tempCol) 
         
-    #Determinant method, how to count the number of swaps made in rowReduction?
+    #Determinant method
     def determinant(self):
         reducedMatrix = self.rowReduction()[0]
         swaps = self.rowReduction()[1]
@@ -217,8 +216,6 @@ class Matrix:
         else:
             print("Only square matrices may have determinants, this matrix is not square.")
 
-
-a = Matrix([[3, 0, 0, 3, 0], [-3, 0, -2, 0, 0], [0, -1, 0, 0, -3], [0, 0, 0, 3, 3], [0, -1, 2, 0, 1]])
 
 #------------- LOADING THE FILE ----------------
 
@@ -250,6 +247,43 @@ class MatrixReader:
             matrice.append(rows) #add 10 by 10 to matrix
         f.close()
         return matrice
+
+
+class VectorReader:
+    def __init__(self, filename):
+        self.filename = filename
+    
+    def load(self):
+        f=open(self.filename, 'r')
+        n= f.readline() #reads first line for dimension
+        s = n.split()   #splits the first line
+        num= int(s[2])+ 1 #gets matrix dimension, int is because split reads as a char
+            
+        f.readline() #useless line
+            
+        line = f.readline().split()
+        for i in range(rows): #rows
+            TempVect = [] #will store the row we want
+            for j in range(num): #col
+                row, col, val = int(line[0]), int(line[1]), float(line[2])  #basically each of the next lines of the file format
+                if row == i and col == j : #checks to see if its 0 entry or not
+                    TempVect.append(val) #add value to row
+                    line = f.readline().split() #loop entry
+                else:
+                    TempVect.append(0)
+                        
+        Vector = [] #new vector
+        #loop will give a vector of dimension asked
+        for i in range(dimension): 
+            Vector.append(TempVect[i])
+        
+        f.close()
+        return Vector
+
+file = VectorReader('matrix_file_10.txt')    
+rows = eval(input("Insert vector row, has to be smalller then the matrix dimension:"))
+dimension = eval(input("Insert vector dimension, has to be smalller then the matrix dimension:"))
+print(file.load())
 
 
 # ------------ SOLVING LINEAR SYSTEM ------------
