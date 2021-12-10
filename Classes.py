@@ -12,8 +12,10 @@ import math
 class Vector:
     # Add feature of reading from file?
     def __init__(self, inputVector):
-        self.vector = inputVector
         self.length = len(inputVector)
+        self.vector = []
+        for i in range(self.length):
+            self.vector.append(inputVector[i])
     
     def __getitem__ (self, index):
         return self.vector[index]
@@ -70,9 +72,13 @@ class Vector:
 
 class Matrix:
     def __init__(self, inputMatrix):
-        self.matrix = inputMatrix
         self.col = len(inputMatrix[0])
         self.row = len(inputMatrix)
+        self.matrix = [[0 for i in range(self.row)] for j in range(self.col)]
+        for i in range(self.row):
+            for j in range(self.col):
+                self.matrix[i][j] = inputMatrix[i][j]
+        
         for i in range(self.row):
             for j in range(1, self.row):
                 assert len(inputMatrix[i]) == len(inputMatrix[j])
@@ -215,7 +221,9 @@ class Matrix:
 
 
 a = Matrix([[3, 0, 0, 3, 0], [-3, 0, -2, 0, 0], [0, -1, 0, 0, -3], [0, 0, 0, 3, 3], [0, -1, 2, 0, 1]])
-print(a.transpose())
+b = a.rowReduction()[0]
+print(a, '\n')
+print(b)
 #print(a.rowReduction())
 #print(a.rowReduction()[0])
 #print(a.determinant())
