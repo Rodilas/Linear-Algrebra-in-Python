@@ -74,7 +74,7 @@ class Matrix:
     def __init__(self, inputMatrix):
         self.col = len(inputMatrix[0])
         self.row = len(inputMatrix)
-        self.matrix = [[0 for i in range(self.row)] for j in range(self.col)]
+        self.matrix = [[0 for i in range(self.col)] for j in range(self.row)]
         for i in range(self.row):
             for j in range(self.col):
                 self.matrix[i][j] = inputMatrix[i][j]
@@ -151,9 +151,7 @@ class Matrix:
         if self.transpose() == self.matrix:
             return "The matrix is symmetrical"
         else:
-            return False
-
-            
+            return False   
 
     def rowReduction(self):
         # This method performs row reduction and returns a matrix in row echolon form
