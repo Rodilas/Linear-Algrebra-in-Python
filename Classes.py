@@ -149,7 +149,7 @@ class Matrix:
 
     def symmetrical (self):
         if self.transpose() == self.matrix:
-            return "The matrix is symmetrical"
+            return True
         else:
             return False   
 
