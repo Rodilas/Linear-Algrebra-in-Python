@@ -129,7 +129,10 @@ class Matrix:
                 return Matrix(mult)            
                                                          
             else:
-                return "Colum of first matrix different from rows of second matrix"   
+                return "Colum of first matrix different from rows of second matrix"
+    
+    def __rmul__(self, other):
+        return self.__mul__(other)
    
 
     def transposition (self):
@@ -212,7 +215,8 @@ class Matrix:
             print("Only square matrices may have determinants, this matrix is not square.")
 
 
-#a = Matrix([[3, 0, 0, 3, 0], [-3, 0, -2, 0, 0], [0, -1, 0, 0, -3], [0, 0, 0, 3, 3], [0, -1, 2, 0, 1]])
+a = Matrix([[3, 0, 0, 3, 0], [-3, 0, -2, 0, 0], [0, -1, 0, 0, -3], [0, 0, 0, 3, 3], [0, -1, 2, 0, 1]])
+print(5*a)
 #print(a.rowReduction())
 #print(a.rowReduction()[0])
 #print(a.determinant())
