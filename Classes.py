@@ -260,29 +260,27 @@ class VectorReader:
     
     def load(self):
         f=open(self.filename, 'r')
-        rows = eval(input("Insert vector row, has to be smalller then the matrix dimension:"))
-        dimension = eval(input("Insert vector dimension, has to be smalller or equal then the matrix dimension:"))
+        vector_row = eval(input("Insert vector row, has to be smalller then the matrix dimension:"))
+        dimension = eval(input("Insert vector dimension, has to be smalller then the matrix dimension:"))
         n= f.readline() #reads first line for dimension
         s = n.split()   #splits the first line
         num= int(s[2])+ 1 #gets matrix dimension, int is because split reads as a char
             
         f.readline() #useless line
-            
-        line = f.readline().split()
-        for i in range(rows): #rows
-            TempVect = [] #will store the row we want
-            for j in range(num): #col
-                row, col, val = int(line[0]), int(line[1]), float(line[2])  #basically each of the next lines of the file format
-                if row == i and col == j : #checks to see if its 0 entry or not
-                    TempVect.append(val) #add value to row
-                    line = f.readline().split() #loop entry
-                else:
-                    TempVect.append(0)
-                        
-        Vector = [] #new vector
-        #loop will give a vector of dimension asked
-        for i in range(dimension): 
-            Vector.append(TempVect[i])
+        if vector_row > num :
+            return "Vector_row to big for the file"
+        elif dimension > num:
+            return "Dimension to big for the file"
+        Vector = [0 for _ in range(dimension)] #initialize vector as zeroes
+        line = f.readline()
+        while line:
+            parts = line.split()
+            row, col, val = int(parts[0]), int(parts[1]), float(parts[2])  #basically each of the next lines of the file format
+            if row > vector_row or (row == vector_row and col >= dimension): #break the cycle if we passed requested row or at requested row and passed dimension
+                break
+            if row == vector_row: #set vector value if we are at requested row
+                Vector[col] = val
+            line = f.readline() #loop entry
         
         f.close()
         return Vector
