@@ -5,6 +5,7 @@ from Classes import Vector, Matrix, LinearSystemSolver
 print("\n")
 print("--------------Question 1------------------")
 print("\n")
+
 m1 = Matrix([[1, 1, 1], 
              [10, 4, 2], 
              [0, 1, 1]])
@@ -21,12 +22,13 @@ for i in range (len(solution1)):
     profit1 += product_profit1[i]*round((solution1[i][0]),5)
     print("The farmer produces", round((solution1[i][0]),5),"tons of " + product_names1[i])
 
+
+# Question 2:
 print("The farmer profits", profit1)
 print("\n")
 print("--------------Question 2------------------")
 print("\n")       
 
-# Question 2:
 m2 = Matrix([[1, 1, 1, 1], 
              [10, 4, 2, 5], 
              [0, 1, 1, 0],
@@ -53,9 +55,11 @@ else:
     print("The farmer's profit decreased by", profit1-profit2)
 
 if solution2[0][0] > solution1[0][0]:
-    print("The government's new measure was successful! It increased wheat production by", solution2[0][0] - solution1[0][0])
+    print("The government's new measure was successful! It increased wheat production by"
+          , solution2[0][0] - solution1[0][0])
 else:
-    print("The government's new measure was not successful! It decreased wheat production by", round((solution1[0][0]-solution2[0][0]),5), "tons")
+    print("The government's new measure was not successful! It decreased wheat production by", 
+          round((solution1[0][0]-solution2[0][0]),5), "tons")
 
 
 
