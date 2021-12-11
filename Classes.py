@@ -140,6 +140,11 @@ class Matrix:
         isinstance(other, (int,float))
         return self.__mul__(other)
    
+    def __getitem__(self, index):
+        return self.matrix[index]
+    
+    def __len__(self):
+        return len(self.matrix)
 
     def transpose (self):
         temp = self.matrix
@@ -249,7 +254,7 @@ class MatrixReader:
         return matrice
 
 
-class VectorReader:
+"""class VectorReader:
     def __init__(self, filename):
         self.filename = filename
     
@@ -283,7 +288,7 @@ class VectorReader:
 file = VectorReader('matrix_file_10.txt')    
 rows = eval(input("Insert vector row, has to be smalller then the matrix dimension:"))
 dimension = eval(input("Insert vector dimension, has to be smalller then the matrix dimension:"))
-print(file.load())
+print(file.load())"""
 
 
 # ------------ SOLVING LINEAR SYSTEM ------------
@@ -327,3 +332,5 @@ class LinearSystemSolver:
         for i in range(self.dim):
             resultMatrix.append([result[i]])
         return Matrix(resultMatrix)
+
+    
