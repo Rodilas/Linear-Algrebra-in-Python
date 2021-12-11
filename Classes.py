@@ -254,12 +254,14 @@ class MatrixReader:
         return matrice
 
 
-"""class VectorReader:
+class VectorReader:
     def __init__(self, filename):
         self.filename = filename
     
     def load(self):
         f=open(self.filename, 'r')
+        rows = eval(input("Insert vector row, has to be smalller then the matrix dimension:"))
+        dimension = eval(input("Insert vector dimension, has to be smalller or equal then the matrix dimension:"))
         n= f.readline() #reads first line for dimension
         s = n.split()   #splits the first line
         num= int(s[2])+ 1 #gets matrix dimension, int is because split reads as a char
@@ -284,11 +286,6 @@ class MatrixReader:
         
         f.close()
         return Vector
-
-file = VectorReader('matrix_file_10.txt')    
-rows = eval(input("Insert vector row, has to be smalller then the matrix dimension:"))
-dimension = eval(input("Insert vector dimension, has to be smalller then the matrix dimension:"))
-print(file.load())"""
 
 
 # ------------ SOLVING LINEAR SYSTEM ------------
