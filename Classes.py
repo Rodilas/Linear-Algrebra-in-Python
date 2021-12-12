@@ -289,9 +289,7 @@ class VectorReader:
 # ------------ SOLVING LINEAR SYSTEM ------------
 
 class LinearSystemSolver:
-    # Temporary constructor before implementing reading of files
     def __init__(self, inputMatrix, inputVector):
-        # Add functionality that checks if matrix is quadratic and same dimension as vector
         self.a = inputMatrix
         self.b = inputVector
         self.dim = len(inputMatrix.matrix)

@@ -7,10 +7,12 @@ Created on Mon Nov 22 13:17:57 2021
 
 import math
 
+# Since the counter method takes extra time we did not want to include it in our oure classes-file, and therefore this file is a duplicate of the original classes plus the counter.
+
+
 # ------------ VECTORS ------------
 
 class Vector:
-    # Add feature of reading from file?
     def __init__(self, inputVector):
         self.vector = inputVector
         self.length = len(inputVector)
@@ -260,9 +262,7 @@ class MatrixReader:
 # ------------ SOLVING LINEAR SYSTEM ------------
 
 class LinearSystemSolver:
-    # Temporary constructor before implementing reading of files
     def __init__(self, inputMatrix, inputVector):
-        # Add functionality that checks if matrix is quadratic and same dimension as vector
         self.a = inputMatrix
         self.b = inputVector
         self.dim = len(inputMatrix.matrix)
