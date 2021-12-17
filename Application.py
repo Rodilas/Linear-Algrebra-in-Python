@@ -80,10 +80,10 @@ def application(solution_1, solution_2):
         print("The farmer's profit decreased by", round((profit1-profit2),3))
 
     if solution2[0][0] > solution1[0][0]:
-        print("The government's new measure was successful! It increased wheat production by"
-              , round((solution2[0][0] - solution1[0][0]),3))
+        print("The government's new measure was successful! The acres the farmer dedicates to wheat reduced by"
+              , round((solution2[0][0] - solution1[0][0]),3), "acres.")
     else:
-        print("The government's new measure was not successful! It decreased wheat production by", 
-              round((solution1[0][0]-solution2[0][0]),3), "tons")
+        print("The government's new measure was not successful! \nThe acres the farmer dedicates to wheat reduced by", 
+              round((solution1[0][0]-solution2[0][0]),3), "acres.")
 
 main()

@@ -28,7 +28,7 @@ class Vector:
         v = []
         for i in range (self.length):
             v.append(self.vector[i] + other.vector[i])
-        return v
+        return Vector(v)
         
     # Multiplying integers and floats with vectors
     def __mul__(self, other):
