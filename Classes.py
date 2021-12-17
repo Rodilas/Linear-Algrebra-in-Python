@@ -322,8 +322,8 @@ class LinearSystemSolver:
 
         # Returning a one column matrix
         resultMatrix =[]
-        for i in range(self.dim):
-            resultMatrix.append([result[i]])
+        for r in result:
+            resultMatrix.append([r])
         return Matrix(resultMatrix)
 
     
